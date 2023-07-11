@@ -105,7 +105,7 @@ def enroll(request, course_id):
 
 # <HINT> Create a submit view to create an exam submission record for a course enrollment,
 def submit(request, course_id):
-    user = request.User
+    user = request.user
     course = get_object_or_404(Course, pk=course_id)
     enrollment = Enrollment.objects.get(user=user, course=course)
 
@@ -164,7 +164,7 @@ def show_exam_result(request, course_id, submission_id):
     total_score = 0
     for choice in selected_choices:
         if choice.is_correct:
-            total_score += choice.question.grade
+            total_score += choice.question.question_grade
 
     context = {
         'course': course,
